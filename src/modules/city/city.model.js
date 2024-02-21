@@ -3,6 +3,7 @@ const { default: mongoose, Types ,Schema} = require('mongoose');
 
 
 const CitySchema = new Schema({
+
     title:{type:String , require:true},
     name:{type:String , require:true},
     description:{type:String , require:true},
@@ -12,6 +13,10 @@ const CitySchema = new Schema({
 
 });
 
-module.exports={
-    
+const CityModel = model("City", CitySchema);
+
+module.exports = {
+
+    CityModel
+
 }

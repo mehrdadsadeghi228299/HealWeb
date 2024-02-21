@@ -1,4 +1,9 @@
-const Router =require('express').Router();
+const router = require('express').Router();
 
-Router.post("/",)
-module.exports = Router;
+router.post("/",)
+router.post("/",)
+
+module.exports = {
+
+    provinceRouter:router
+};

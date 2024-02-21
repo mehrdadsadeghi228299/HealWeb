@@ -1,4 +1,4 @@
-const { default: mongoose, Types ,Schema} = require('mongoose');
+const {  Types ,Schema, model} = require('mongoose');
 
 const ProvinceSchema = new Schema({
     name:{type:'string',require:true},
@@ -8,14 +8,8 @@ const ProvinceSchema = new Schema({
 
 });
 
-const CitySchema = new Schema({
-    title:{type:String , require:true},
-    name:{type:String , require:true},
-    description:{type:String , require:true},
-    lat:{type:String , require:true},
-    lng:{type:String , require:true},
-    key:{type:Number , required:true},
+const ProvinceModel = model( "province" , ProvinceSchema );
 
-});
-
-const CategoryModel = model( "Category" , CategorySchema )
+module.exports={
+    ProvinceModel
+}
