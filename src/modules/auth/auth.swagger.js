@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *  name: Auth
- *  description: Auth Module and Routes
+ *  description: Auth Modules and Routes
  */
 
 /**
