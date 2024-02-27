@@ -2,9 +2,9 @@
   "name": "healweb",
   "version": "1.0.0",
   "description": "a site for counting a anther thing a in the  Helal",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon main.js"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,6 @@
     "express-ejs-layouts": "^2.5.1",
     "http-codes": "^1.0.0",
     "http-errors": "^2.0.0",
-    "i": "^0.3.7",
     "jalali-moment": "^3.3.11",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",

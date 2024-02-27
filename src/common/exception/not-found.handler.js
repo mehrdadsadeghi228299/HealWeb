@@ -5,4 +5,6 @@ function NotFoundHandler(app) {
         })
     })
 }
-module.exports = NotFoundHandler
+module.exports = {
+    NotFoundHandler
+}

@@ -7,4 +7,6 @@ function AllExceptionHandler(app) {
         })
     })
 }
-module.exports = AllExceptionHandler
+module.exports = {
+    AllExceptionHandler
+}

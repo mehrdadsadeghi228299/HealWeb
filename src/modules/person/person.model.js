@@ -1,5 +1,5 @@
 
-const { default: mongoose, Types ,Schema} = require('mongoose');
+const {model, Types ,Schema} = require('mongoose');
 
 const OTPSchema = new Schema({
     code: {type: String, required: false, default: undefined},

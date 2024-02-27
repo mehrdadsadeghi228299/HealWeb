@@ -1,7 +1,7 @@
 const createHttpError = require("http-errors");
 const AuthorizationMessage = require("../messages/auth.message");
 const jwt = require("jsonwebtoken");
-const UserModel = require("../../modules/user/user.model");
+const UserModel = require("../../modules/person/person.model");
 require("dotenv").config();
 const Authorization = async (req, res, next) => {
     try {
