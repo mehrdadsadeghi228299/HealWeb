@@ -1,6 +1,5 @@
 
 const { default: mongoose, Types ,Schema} = require('mongoose');
-
 const OTPSchema = new Schema({
     code: {type: String, required: false, default: undefined},
     expiresIn: {type: Number, required: false, default: 0},
@@ -18,8 +17,8 @@ const PersonSchema = new Schema({
     howCreatedUser:{type:String , require:false},
     descriptionForupdate:{type:String, require:false},
     province:{type:String , require:true},
-    subProvince:{type:String , require:false},
-    accessLevel:{type:String ,enum:['one','two','there'],require:true,default:'one'},
+    subProvince:{type:String , require:true},
+    acessLevel:{type:String ,enum:['one','two','there'],require:true,default:'one'},
     email:{type:String , required:false},
     CityId:{type:String, required:false, default: undefined,ref:'City'},
     otpMobile: {type: OTPSchema}
