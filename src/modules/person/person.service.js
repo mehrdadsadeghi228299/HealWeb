@@ -1,5 +1,6 @@
 const autoBind = require("auto-bind");
 const createHttpError = require("http-errors");
+const { PersonModel } = require("./person.model");
 
 
 class PersontService {

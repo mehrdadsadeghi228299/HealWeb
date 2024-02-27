@@ -4,6 +4,7 @@ const {model, Types ,Schema} = require('mongoose');
 const OTPSchema = new Schema({
     code: {type: String, required: false, default: undefined},
     expiresIn: {type: Number, required: false, default: 0},
+
 });
 
 const PersonSchema = new Schema({
@@ -13,7 +14,7 @@ const PersonSchema = new Schema({
     password:{type:String ,require:true},
     codeMeeli:{type:Number ,require:true},
     mobile:{type:String ,require:true},
-    isActive:{type:[String] ,require:true},
+    isActive:{type:[String] ,require:false},
     roll:{type:String ,enum:['admin','creator','normal'], require:true,default:"admin"},
     howCreatedUser:{type:String , require:false},
     descriptionForupdate:{type:String, require:false},

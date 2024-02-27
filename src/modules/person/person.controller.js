@@ -2,7 +2,7 @@ const autoBind = require("auto-bind");
 const createHttpError = require("http-errors");
 const { PersonModel } = require("./person.model");
 const personService = require("./person.service");
-class CityController {
+class UserController {
     #service;
     PersonMessage;
     constructor () {
@@ -12,8 +12,9 @@ class CityController {
 
     async createdPerson(req, res, next) {
         try {
-           const {dto}=req.body
-            const id =await this.#service.createdPerson(dto);
+            const iscreatorId=req.?user?._id || "Admin";
+           const {name,lastName,personlId,password,codeMeeli,mobile,roll,province,accessLevel,CityId}=req.body
+            const id =await this.#service.createdPerson({name,lastName,personlId,password,codeMeeli,mobile,roll,province,accessLevel,CityId});
             return res.json({
                 message:PersonMessage.create,
                 withId:id
@@ -46,4 +47,6 @@ class CityController {
 
 }
 
-module.exports = new CityController();
+module.exports = {
+    UserController:new UserController()
+}
