@@ -1,12 +1,26 @@
 const CookieNames = require("../../common/constant/cookie.enum");
 const NodeEnv = require("../../common/constant/env.enum");
+const autoBind = require("auto-bind");
+const authService = require("./auth.service");
 const { AuthMessage } = require("./auth.messages");
-const autoBind = require("auto-bind")
 class AuthController {
     #service;
     constructor(){
         autoBind(this);
         this.#service = authService;
+    }
+    async login(req, res, next) {
+        try {
+
+            const {codemeeli , password} = req.body;
+           const token= await this.#service.login(codemeeli, password);
+            return res.json({
+                message: AuthMessage.LoginSuccessfully,
+                token: token
+            });
+        } catch (error) {
+            next(error)
+        }
     }
     async sendOTP(req, res, next) {
         try {

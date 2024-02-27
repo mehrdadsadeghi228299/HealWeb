@@ -4,5 +4,5 @@ router.post("/",)
 
 module.exports = {
     
-    provinceRouter:router
+    PersonRoutes:router
 };
