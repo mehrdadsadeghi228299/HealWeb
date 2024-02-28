@@ -14,9 +14,12 @@ class AuthController {
 
             const {codemeeli , password} = req.body;
             const token= await this.#service.login(codemeeli, password);
-            return res.json({
-                message: AuthMessage.LoginSuccessfully,
-                token: token
+            return res.cookie("accessToken", token,{
+                httpOnly: true,
+                secure:process.env.NODE_ENV===NodeEnv.Production
+            }).json({
+                message:AuthMessage.LoginSuccessfully,
+                token:token
             });
         } catch (error) {
             next(error)

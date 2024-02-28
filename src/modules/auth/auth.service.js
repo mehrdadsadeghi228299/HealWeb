@@ -13,7 +13,6 @@ class AuthService {
     }
     async login(codemeeli,password) {
         const user = await this.#model.findOne({codeMeeli:codemeeli});
-        console.log(user);
         if (!user) return createHttpError.NotFound(AuthMessage.NotFound);
         if(password!=user.password) return createHttpError.NotAcceptable(AuthMessage.PAWSSORDINCORRECT);        
         const accessToken = this.signToken({acessLevel:user.accessLevel,rule:user.rule ,id: user._id,});
@@ -48,10 +47,11 @@ class AuthService {
         if (!user.verifiedMobile) {
             user.verifiedMobile = true;
         }
+
         const accessToken = this.signToken({mobile, id: user._id});
         user.accessToken = accessToken;
         await user.save();
-        return accessToken;
+        return accessToken; 
     }
     async checkExistByMobile (mobile) {
         const user = await this.#model.findOne({mobile});

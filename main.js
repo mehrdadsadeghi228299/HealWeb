@@ -10,13 +10,14 @@ const { AllRoutes } = require('./src/routes');
 const SwaggerConfig = require('./src/config/swagger.config');
 dotenv.config();
 const port=process.env.PORT;
+const cookiesecretekey=process.env.cookiesecretekey;
 async function main(){
     const app = express();
     require('./src/config/mongoose.config');
     SwaggerConfig(app);
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(cookieParser("cookiesecretekey"));
+    app.use(cookieParser(cookiesecretekey));
     app.set("view engine", "ejs");
     app.set(express.static("public"))
     app.set("layout","./layout/panel/main.ejs");
