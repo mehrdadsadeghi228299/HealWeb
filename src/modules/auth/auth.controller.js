@@ -13,7 +13,7 @@ class AuthController {
         try {
 
             const {codemeeli , password} = req.body;
-           const token= await this.#service.login(codemeeli, password);
+            const token= await this.#service.login(codemeeli, password);
             return res.json({
                 message: AuthMessage.LoginSuccessfully,
                 token: token

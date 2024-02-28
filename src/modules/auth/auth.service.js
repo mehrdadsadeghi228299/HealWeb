@@ -12,11 +12,11 @@ class AuthService {
         this.#model = PersonModel;
     }
     async login(codemeeli,password) {
-        const user = await this.#model.findOne(codemeeli);
+        const user = await this.#model.findOne({codeMeeli:codemeeli});
         console.log(user);
         if (!user) return createHttpError.NotFound(AuthMessage.NotFound);
         if(password!=user.password) return createHttpError.NotAcceptable(AuthMessage.PAWSSORDINCORRECT);        
-        const accessToken = this.signToken({acessLevel,roll ,id: user._id,});
+        const accessToken = this.signToken({acessLevel:user.accessLevel,rule:user.rule ,id: user._id,});
         user.accessToken = accessToken;
         await user.save();
         return accessToken;

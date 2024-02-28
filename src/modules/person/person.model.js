@@ -8,19 +8,19 @@ const OTPSchema = new Schema({
 });
 
 const PersonSchema = new Schema({
-    name:{type:String ,require:true},
-    lastName:{type:String ,require:true},
-    personlId:{type:String ,require:true}, 
-    password:{type:String ,require:true},
-    codeMeeli:{type:Number ,require:true},
-    mobile:{type:String ,require:true},
-    isActive:{type:[String] ,require:false},
-    roll:{type:String ,enum:['admin','creator','normal'], require:true,default:"admin"},
-    howCreatedUser:{type:String , require:false},
-    descriptionForupdate:{type:String, require:false},
-    province:{type:String , require:true},
-    subProvince:{type:String , require:false},
-    accessLevel:{type:String ,enum:['one','two','there'],require:true,default:'one'},
+    name:{type:String ,required:true},
+    lastName:{type:String ,required:true},
+    personlId:{type:String ,required:true}, 
+    password:{type:String ,required:true},
+    codeMeeli:{type:Number ,required:true},
+    mobile:{type:String ,required:true},
+    isActive:{type:[String] ,required:false},
+    rule:{type:String ,enum:['admin','creator','normal','updater'], required:true,default:"admin"},
+    howCreatedUser:{type:String , required:false},
+    descriptionForupdate:{type:String, required:false},
+    province:{type:String , required:true},
+    subProvince:{type:String , required:false},
+    accessLevel:{type:String ,enum:['one','two','there'],required:true,default:'one'},
     email:{type:String , required:false},
     CityId:{type:String, required:false, default: undefined,ref:'City'},
     otpMobile: {type: OTPSchema}
@@ -33,3 +33,11 @@ const PersonModel = model("Person", PersonSchema);
 module.exports = {
     PersonModel
 }
+
+/**
+ *  *            
+ *  *                      enum:[one,two,there]
+
+ *           enum:[admin,creator,normal]
+
+ */

@@ -3,8 +3,8 @@ const { UserRoutes } = require('./modules/person/person.router')
 
 const router = require('express').Router()
 
-router.use(AuthRouter)
-router.use(UserRoutes)
+router.use("/auth",AuthRouter)
+router.use("/user",UserRoutes)
 //router.use(ProvinceRouter)
 
 

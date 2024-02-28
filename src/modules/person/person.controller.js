@@ -1,10 +1,10 @@
 const autoBind = require("auto-bind");
 const createHttpError = require("http-errors");
-const { PersonModel } = require("./person.model");
 const personService = require("./person.service");
+const { validationResult } = require("express-validator");
+const { PersonMessage } = require("./person.message");
 class UserController {
     #service;
-    PersonMessage;
     constructor () {
         autoBind(this);
         this.#service = personService;
@@ -12,9 +12,16 @@ class UserController {
 
     async createdPerson(req, res, next) {
         try {
-            const iscreatorId=req.?user?._id || "Admin";
-           const {name,lastName,personlId,password,codeMeeli,mobile,roll,province,accessLevel,CityId}=req.body
-            const id =await this.#service.createdPerson({name,lastName,personlId,password,codeMeeli,mobile,roll,province,accessLevel,CityId});
+            const iscreatorId=req?.user?._id || "Admin";
+            const errorValidator = validationResult(req);
+            if (!errorValidator) {
+                return res.status(HttpStatus.NOT_IMPLEMENTED).json({
+                    statusCodes: HttpStatus.NOT_IMPLEMENTED,
+                    message: errorValidator
+                });   
+            }
+           const {name,lastName,personlId,password,codeMeeli,mobile,rule,province,accessLevel,subProvince,CityId}=req.body
+            const id =await this.#service.createdPerson({name,lastName,personlId,password,codeMeeli,mobile,rule,province,subProvince,accessLevel,CityId},iscreatorId);
             return res.json({
                 message:PersonMessage.create,
                 withId:id
