@@ -3,6 +3,7 @@ const HttpCodes = require("http-codes");
 const createHttpError = require("http-errors");
 const provinceService = require("./province.service");
 const { ProvinceMessage } = require("./province.message");
+const { HttpStatusCode } = require("axios");
 class ProvinceController {
     #service;
     success_message;
@@ -14,11 +15,12 @@ class ProvinceController {
         try {
             const errorValidator = validationResult(req);
             if (!errorValidator) {
-                return res.status(HttpStatus.NOT_IMPLEMENTED).json({
-                    statusCodes: HttpStatus.NOT_IMPLEMENTED,
+                return res.status(HttpStatusCode.NotImplemented).json({
+                    statusCodes: HttpStatusCode.NotImplemented,
                     message: errorValidator
                 });   
-            }            const {owner,name,count,men,city} = req.body;
+            }           
+             const {owner,name,count,men,city} = req.body;
 
             const result =await this.#service.createProvince({owner,name,count,men,city});
             return res.json({
