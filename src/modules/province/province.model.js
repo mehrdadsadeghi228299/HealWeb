@@ -1,5 +1,4 @@
 const {  Types ,Schema, model} = require('mongoose');
-const { provinceParametersModel } = require('../parameters.model');
 
 const provinceParametersWithDate= new Schema({
     provinceParameters:{type:Types.ObjectId,required:true,ref:'provinceParameters'},
