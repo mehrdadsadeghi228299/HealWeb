@@ -16,17 +16,18 @@ class CityService {
         return result._id.toString();
     }
     async findMyCityANDShow(city) {
-        return await this.#model.findOne({name:city});
-   
+        return await  checkExistCity(city)
 
     }
-    async Addparamters(id_paramters,nameCity,provinceName) {
+    async Addparamters(id_paramters,nameCity) {
         const result = this.#model.updateOne({name:nameCity},{
             '$set':{paramters:id_paramters}
-        })
+        });
+        if(!result) create 
     }
-    async showParameters() {
-
+    async showParameters(city) {
+       await checkExistCity(city);
+        return await this.#model.findOne({name:city}).populate('parameters');
     }
 
     async checkExistCity(name){

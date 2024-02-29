@@ -7,7 +7,6 @@ const { HttpStatusCode } = require("axios");
 const { CityMessage } = require("./city.message");
 class CityController {
     #service;
-    success_message;
     constructor () {
         autoBind(this);
         this.#service = cityService;
@@ -48,8 +47,8 @@ class CityController {
     }
     async Addparamters(req, res, next) {
         try {
-        const id_paramters=req.body.id_paramters;
-        const result = await this.#service.Addparamters(id_paramters,nameCity,provinceName);
+        const {id_paramters,nameCity}=req.body;
+        const result = await this.#service.Addparamters(id_paramters,nameCity);
         
         return res.json({
             message : CityMessage.IdOfParameter,
@@ -62,7 +61,7 @@ class CityController {
     }
     async showParameters(req, res, next) {
         try {
-            const city=req.params.city;
+            const city=req.body.city;
             const result = await this.#service.showParameters(city);
             return res.json({
                 message : CityMessage.RequestOK,

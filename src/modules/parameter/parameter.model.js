@@ -1,6 +1,6 @@
 const mongoose= require('mongoose');
 
-const SaharTeam=new Schema({
+const SaharTeam =new Schema({
     name:{type:String, required:true},
     day:{type:Date, required:true}
 });

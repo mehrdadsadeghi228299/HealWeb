@@ -1,5 +1,5 @@
 
-const CityMessage = {
+const parameterMessage = {
 
     Created: "category created successfully",
     NotFound: "category not found",
@@ -8,7 +8,7 @@ const CityMessage = {
     IdOfParameter:"id of parameter is add successfully",
     RequestOK:"request successful process",
     }
-    const CityMessageValidotr={
+    const parameterMessageValidotr={
         Name: " the value used for the filed of Name is not valid" ,
         title: " the value used for the filed of last title is not valid" ,
         description: " the value used for the filed of description Id is not valid" ,
@@ -16,6 +16,6 @@ const CityMessage = {
     
     }
 module.exports = {
-    CityMessage,
-    CityMessageValidotr
+    parameterMessage,
+    parameterMessageValidotr
 }

@@ -1,14 +1,15 @@
 const { body } = require('express-validator');
-const { MessageValidotr } = require('./person.message');
+const { CityMessageValidotr } = require('./city.message');
 
-const validatorUser = [
-    body('name').notEmpty().trim().isString().toLowerCase().withMessage(MessageValidotr.Name),
-    body('title').notEmpty().trim().isString().toLowerCase().isLength({min:3,max:15}).withMessage(MessageValidotr.lastName),
-    body('description').notEmpty().trim().isNumeric().isLength({min:6,max:8}).withMessage(MessageValidotr.personlId),
-    body('lat').notEmpty().trim().isNumeric().withMessage(MessageValidotr.codeMeeli),
-    body('lng').notEmpty().trim().isNumeric().withMessage(MessageValidotr.codeMeeli),
+const validatorCity = [
+    body('name').notEmpty().trim().isString().toLowerCase().withMessage(CityMessageValidotr.Name),
+    body('title').notEmpty().trim().isString().toLowerCase().isLength({min:3,max:15}).withMessage(CityMessageValidotr.title),
+    body('description').notEmpty().trim().isString().isLength({min:6,max:8}).withMessage(CityMessageValidotr.description),
+    body('lat').notEmpty().trim().isString().withMessage(CityMessageValidotr.latANDlng),
+    body('lng').notEmpty().trim().isString().withMessage(CityMessageValidotr.latANDlng),
+    body('key').notEmpty().trim().isNumeric().withMessage(CityMessageValidotr.latANDlng),
 
 ]
 module.exports={
-    validatorUser
+    validatorCity
 }
