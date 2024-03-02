@@ -15,7 +15,7 @@ class parameterController{
         const {num1,num2,num3,num4,num5,num6,num7,num8,num9}=req.body;
         const result = await this.#service.createparameter({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
         return res.json({
-            message:parameterMessage,
+            message:parameterMessage.Created,
 
         })
      } catch (error) {
@@ -23,10 +23,45 @@ class parameterController{
      }
 
     }
-    async findMyparameterANDShow(city) {
+    async findMyparameterANDShow(req, res,next) {
+        try {
+            
+        } catch (error) {
+            next(error);
+        }
 
     }
-    async AddSahabTeam(req,res,next) {
+
+    async addSaharTeamParamter(req,res,next){
+        try {
+            const {name,id_parameter}=req.body;
+            const {userId}=req.user;
+            const result = await this.#service.addSaharTeamParamter(name,id_parameter);
+            if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
+            return res.json({
+                message:result
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async addSahabTeamParamter(req,res,next){
+        try {
+            const {countWomen,countMen,countPP,countPR,count,id_parameter}=req.body;
+            const {userId}=req.user;
+            const result = await this.#service.addSaharTeamParamter(countWomen,countMen,countPP,countPR,count,id_parameter);
+            if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
+            return res.json({
+                message:result
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+/**
+ * 
+ *     async AddSahabTeam(req,res,next) {
         try {
             const {id_paramters,sahabTeam} = req.body;
             const result = await this.#service.AddSahabTeam(id_paramters,sahabTeam);
@@ -39,20 +74,47 @@ class parameterController{
         }
 
     }
+    async createSahabTeam(req, res, next) {
+        try {
+           const {userId}=req.user;
+           const {countWomen,countMen,countPP,countPR,count}=req.body;
+           const result = await this.#service.createSahabTeam({countWomen,countMen,countPP,countPR,count},userId);
+           return res.json({
+                message:parameterMessage,
+                result:result
+            });
+        } catch (error) {
+           next(error);
+        }
+   
+    }
     async AddSaharTeam(req,res,next) {
         try {
-            const {id_paramters,sahabTeam} = req.body;
-            const result = await this.#service.AddSaharTeam(id_paramters,sahabTeam);
+            const {name} = req.body;
+            const result = await this.#service.AddSaharTeam(id_paramters,sahabTeam);z
             return res.json({
                 message:parameterMessage.RequestOK+ "upadte was successfully",
-                
             });
         } catch (error) {
             next(error);
         }
 
     }
-
+    async createSaharTeam(req, res, next) {
+        try {
+           const {userId}=req.user;
+           const {name}=req.body;
+           const result = await this.#service.createSaharTeam(name,userId);
+           return res.json({
+               message:parameterMessage,
+               result:result
+           });
+        } catch (error) {
+           next(error);
+        }
+   
+    } 
+ */
 
     async checkExistCity(name){
 

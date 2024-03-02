@@ -16,6 +16,8 @@ const ProvinceObjectParametersSchema = new mongoose.Schema({
     province:{type:mongoose.Types.ObjectId,required:true,ref:"Province"},
     city:{type:mongoose.Types.ObjectId,required:true,ref:"city"},
     user:{type:mongoose.Types.ObjectId,required:true,ref:"person"},
+    SahabTeam:{type:mongoose.Types.ObjectId,required:false,ref:"SahabTeam"},
+    SahabTeam:{type:mongoose.Types.ObjectId,required:false,ref:"SaharTeam"},
     date:{type:Date,required:true},
     SaharTeamCity:{type:SaharTeam,required:false},
     SahabTeamCity:{type:SahabTeam,required:false},
@@ -30,9 +32,22 @@ const ProvinceObjectParametersSchema = new mongoose.Schema({
     num7:{type:Number,required:true},
     num8:{type:Number,required:true},
     num9:{type:Number,required:true},
-});
+    s:[{
+        name:String,
+        date:Date
+    }],
+    b:[{
+        countWomen:{type:Number, required:true},
+        countMen:{type:Number, required:true},
+        countPP:{type:Number, required:true},
+        countPR:{type:Number, required:true},
+        count:{type:Number, required:true},
+        day:{type:Date, required:true}
+     }]
+ });
 
-
+const SahabTeamModel=mongoose.model("SahabTeam",SahabTeam);
+const SaharTeamModel=mongoose.model("SaharTeam",SaharTeam);
 const provinceParametersModel = mongoose.model( "provinceParameters" , ProvinceObjectParametersSchema );
 
 module.exports={
