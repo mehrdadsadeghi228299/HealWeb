@@ -23,23 +23,23 @@
  *                    -    num9
  *              properties:
  *                  num1:
- *                     type: string
+ *                     type: number
  *                  num2:
- *                     type: string
+ *                     type: number
  *                  num3:
- *                     type: string
+ *                     type: number
  *                  num4:
- *                     type: string
+ *                     type: number
  *                  num5:
- *                     type: string
+ *                     type: number
  *                  num6:
- *                     type: string
+ *                     type: number
  *                  num7:
- *                     type: string
+ *                     type: number
  *                  num8:
- *                     type: string
+ *                     type: number
  *                  num9:
- *                     type: string
+ *                     type: number
  *          Addvolunteries:
  *              type: object
  *              required:

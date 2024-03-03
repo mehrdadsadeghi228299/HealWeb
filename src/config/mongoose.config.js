@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 const tempText="Mongoose status is : "
-const AtlasURL=process.env.MONGODB_URL;
+const AtlasURL=process.env.MONGODB_URL_LOCAL;
 try {
     mongoose.connect(AtlasURL);
     mongoose.connection.on('connected', () => console.log(tempText,'connected'));

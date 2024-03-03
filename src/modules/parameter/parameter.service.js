@@ -1,25 +1,26 @@
 const autoBind = require("auto-bind");
-const HttpCodes = require("http-codes");
 const createHttpError = require("http-errors");
-const { CityMessage, parameterMessage } = require("./parameter.message");
+const {  parameterMessage } = require("./parameter.message");
 const { PersonModel } = require("../person/person.model");
 const { PersonMessage } = require("../person/person.message");
-const { CityModel } = require("../city/city.model");
+const { ParametersModel } = require("./parameter.model");
 class parameterService {
     #model;
     #usermodel;
-
     constructor () {
         autoBind(this);
-        this.#model = CityModel ;
+        this.#model = ParametersModel ;
         this.#usermodel = PersonModel ;
     }
-    async createparameter(dto,userId) {
+    async createparameterService(dto,userId) {
         const user = await this.#usermodel.findById(userId);
         if(!user) return createHttpError.MethodNotAllowed(PersonMessage.NotFound);
+        const provincevar =user.province;
+        const cityvar =user.subProvince;
+        console.log(provincevar,cityvar,userId);
         const newparameters = await this.#model.create({
-            province:user.province,
-            city:user.subProvince,
+            province:provincevar,
+            city:cityvar,
             user:userId,
             num1:dto.num1,
             num2:dto.num2,
@@ -30,11 +31,10 @@ class parameterService {
             num7:dto.num7,
             num8:dto.num8,
             num9:dto.num9,
+            
         });
         user.paramters= newparameters._id;
-        newparameters._id;
-        const addResutToUser = await this.#usermodel.findOne({_id:user.id});
-        if(!addResutToUser ||addResutToUser.error )
+        await user.save();
         return newparameters._id.toString();
 
     }
@@ -49,39 +49,41 @@ class parameterService {
 
     async checkExistCity(name){
         const result = await this.#model.findOne({name});
-        if(!result) createHttpError.NotFound(CityMessage.NotFound);
-        return result 
+        if(!result) createHttpError.NotFound(parameterMessage.NotFound);
+        return   result 
 
     }
 
-    async addSaharTeamParamter(id,name){
-        const extractParamterId= await this.#usermodel.findById({_id:id});   
-          return this.#model.updateOne({_id:extractParamterId._id},{
-             '#push':{'s.name':name}
-         });
+    async addSaharTeamParamter(name,id){
+        const extractParamterId= await this.#usermodel.findById(id.toString());   
+        const resultForupdate=await this.#model.findById(extractParamterId.paramters.toString());
+        resultForupdate.s.push(name);
+        return await resultForupdate.save();
+         
      }    
     async addSahabTeamParamter(countWomen,countMen,countPP,countPR,count,id){
-        const extractParamterId= await this.#usermodel.findById({_id:id});   
-        const result = this.#model.findById({_id:extractParamterId._id});
+        const extractParamterId= await this.#usermodel.findById(id.toString());   
+        const result = await this.#model.findById({_id:extractParamterId.paramters});
         result.b.countWomen=countWomen;
         result.b.countMen=countMen;
         result.b.countPP=countPP;
         result.b.countPR=countPR;
         result.b.count=count;
-        return result.save();
+        return await result.save();
 
      }
      async addVolunteriesParamter(id,name){
-        const extractParamterId = await this.#usermodel.findById({_id:id});   
-        const result = this.#model.findById({_id:extractParamterId});
+        const extractParamterId = await this.#usermodel.findById(id.toString());   
+        const result = await this.#model.findById({_id:extractParamterId.paramters});
         result.volunter=name;
-        return result.save();
+
+        return  await result.save();
      }
      async addPersonelParamter(id,name){
-        const extractParamterId = await this.#usermodel.findById({_id:id});   
-        const result = this.#model.findById({_id:extractParamterId});
+        const extractParamterId = await this.#usermodel.findById(id.toString());   
+        const result =await this.#model.findById({_id:extractParamterId.paramters.toString()});
         result.personel=name;
-        return result.save();
+        return await result.save();
      }
 
 }

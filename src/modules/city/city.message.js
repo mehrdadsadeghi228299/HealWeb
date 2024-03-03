@@ -1,10 +1,10 @@
 
 const CityMessage = {
 
-    Created: "category created successfully",
-    NotFound: "category not found",
-    AlreadyExist: "category already exist",
-    Deleted: "category deleted successfully",
+    Created: "city created successfully",
+    NotFound: "city not found",
+    AlreadyExist: "city already exist",
+    Deleted: "city deleted successfully",
     IdOfParameter:"id of parameter is add successfully",
     RequestOK:"request successful process",
     }

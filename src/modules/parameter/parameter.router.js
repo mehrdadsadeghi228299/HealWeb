@@ -3,8 +3,8 @@ const parameterController = require('./parameter.controller');
 
 const router = require('express').Router();
 
-router.post('/create-paramter',Authorization,parameterController.createparameter);
-router.put('/add-saharTeam',Authorization,parameterController.addSahabTeamParamter);
+router.post('/create-paramters',Authorization,parameterController.createparameter);
+router.put('/add-saharTeam',Authorization,parameterController.addSaharTeamParamter);
 router.put('/add-sahabTeam',Authorization,parameterController.addSahabTeamParamter);
 router.put('/add-volunter',Authorization,parameterController.addvolunteries);
 router.put('/add-personel',Authorization,parameterController.addPersonel);

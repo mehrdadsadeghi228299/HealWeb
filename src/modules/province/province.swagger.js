@@ -25,9 +25,9 @@
  *                  count:
  *                      type: number
  *                  city:
- *                      type: string
+ *                      type: array
  *                  men:
- *                      type: string
+ *                      type: array
  *          AddCity:
  *              type: object
  *              required:

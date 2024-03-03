@@ -16,9 +16,7 @@ class AuthService {
         if (!user) return createHttpError.NotFound(AuthMessage.NotFound);
         if(password!=user.password) return createHttpError.NotAcceptable(AuthMessage.PAWSSORDINCORRECT);        
         const accessToken = this.signToken({acessLevel:user.accessLevel,rule:user.rule ,id: user._id,});
-        user.accessToken = accessToken;
-        await user.save();
-        return accessToken;
+        return accessToken ;
         
     }
     async sendOTP (mobile) {

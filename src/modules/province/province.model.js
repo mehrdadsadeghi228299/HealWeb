@@ -9,7 +9,7 @@ const ProvinceSchema = new Schema({
     owner:{type:String,required:true},
     count:{type:Number,required:false},
     men:{type:[String],required:true},   
-    city:{type:[Types.ObjectId],required:true,ref:'city'},
+    city:{type:[Types.ObjectId],required:true,ref:'City'},
     provinceParameters:{type:[provinceParametersWithDate],require:false},
 
 },{

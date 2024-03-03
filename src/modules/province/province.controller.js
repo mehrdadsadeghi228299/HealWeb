@@ -4,6 +4,7 @@ const createHttpError = require("http-errors");
 const provinceService = require("./province.service");
 const { ProvinceMessage } = require("./province.message");
 const { HttpStatusCode } = require("axios");
+const { validationResult } = require("express-validator");
 class ProvinceController {
     #service;
     success_message;

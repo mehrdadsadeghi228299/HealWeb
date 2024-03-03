@@ -1,5 +1,4 @@
 const autoBind = require("auto-bind");
-const HttpCodes = require("http-codes");
 const createHttpError = require("http-errors");
 const parameterService = require("./parameter.service");
 const { parameterMessage } = require("./parameter.message");
@@ -11,9 +10,9 @@ class parameterController{
     }
     async createparameter(req, res, next) {
      try {
-        const {userId}=req.user;
+        const userId=req.user._id;
         const {num1,num2,num3,num4,num5,num6,num7,num8,num9}=req.body;
-        await this.#service.createparameter({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
+        await this.#service.createparameterService({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
         return res.json({
             message:parameterMessage.CreatedParameters,
 
@@ -40,9 +39,10 @@ class parameterController{
     async addSaharTeamParamter(req,res,next){
         try {
             const {name}=req.body;
-            const {id}=req.user;
+            const id=req.user._id;
+            console.log(id);
             const result = await this.#service.addSaharTeamParamter(name,id);
-            if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
+            if(!result || result.errors) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
             return res.json({
                 message:parameterMessage.RequestProcessForAddingToSaharTeam
             });
@@ -54,9 +54,9 @@ class parameterController{
     async addSahabTeamParamter(req,res,next){
         try {
             const {countWomen,countMen,countPP,countPR,count}=req.body;
-            const {id}=req.user;
+            const id=req.user._id;
             const result = await this.#service.addSaharTeamParamter(countWomen,countMen,countPP,countPR,count,id);
-            if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
+            if(!result || result.errors) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
             return res.json({
                 message:parameterMessage.RequestProcessForAddingToSahabTeam
             });
@@ -67,10 +67,10 @@ class parameterController{
 
     async addvolunteries(req, res,next) {
     try {
-        const {id}=req.user;
+        const id=req.user._id;
         const {name}=req.body;
         const result = await this.#service.addVolunteriesParamter(id,name);
-        return result.json({
+        return res.json({
             message:parameterMessage.AddingVolunterName,
             result:result,
         }); 
@@ -80,7 +80,7 @@ class parameterController{
     }
     async addPersonel(req, res,next) {
     try {
-        const {id}=req.user;
+        const id=req.user._id;
         const {name}=req.body;
         const result = await this.#service.addPersonelParamter(id,name);
         return result.json({

@@ -18,11 +18,11 @@ const PersonSchema = new Schema({
     rule:{type:String ,enum:['admin','creator','normal','updater'], required:true,default:"admin"},
     howCreatedUser:{type:String , required:false},
     descriptionForupdate:{type:String, required:false},
-    province:{type:String , required:true},
-    subProvince:{type:String , required:false},
+    province:{type:Types.ObjectId , required:true,ref:"province"},
+    subProvince:{type:Types.ObjectId , required:true,ref:"citymodel"},
     accessLevel:{type:String ,enum:['one','two','there'],required:true,default:'one'},
     email:{type:String , required:false},
-    CityId:{type:Types.ObjectId, required:false, default: undefined,ref:'City'},
+    CityId:{type:Types.ObjectId, required:false,ref:'citymodel'},
     paramters:{type:Types.ObjectId, required:false, default: undefined,ref:'provinceParameters'},
     otpMobile: {type: OTPSchema}
 }
@@ -35,10 +35,3 @@ module.exports = {
     PersonModel
 }
 
-/**
- *  *            
- *  *                      enum:[one,two,there]
-
- *           enum:[admin,creator,normal]
-
- */

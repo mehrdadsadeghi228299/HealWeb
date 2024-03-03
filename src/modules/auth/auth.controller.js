@@ -11,15 +11,15 @@ class AuthController {
     }
     async login(req, res, next) {
         try {
-
+            const AccessToken=CookieNames.AccessToken;
             const {codemeeli , password} = req.body;
-            const token= await this.#service.login(codemeeli, password);
-            return res.cookie("accessToken", token,{
+            const accessToken= await this.#service.login(codemeeli, password);
+            return res.cookie('access_token', accessToken,{
                 httpOnly: true,
                 secure:process.env.NODE_ENV===NodeEnv.Production
             }).json({
                 message:AuthMessage.LoginSuccessfully,
-                token:token
+                token:accessToken
             });
         } catch (error) {
             next(error)

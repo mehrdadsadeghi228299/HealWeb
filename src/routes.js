@@ -11,7 +11,7 @@ router.use("/user",UserRoutes);
 router.use("/province",ProvinceRouter);
 router.use("/city",CityRouter);
 router.use("/city",CityRouter);
-router.use("/paramter",parameterRouter);
+router.use("/paramters",parameterRouter);
 
 
 module.exports ={
