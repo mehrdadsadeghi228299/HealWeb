@@ -11,6 +11,9 @@ const parameterMessage = {
     RequestProcessForAddingToSaharTeam:"Parameters Adding To Sahar Team successful process",
     RequestProcessForAddingToSahabTeam:"Parameters Adding To Sahab Team successful process",
     RequestOK:"Parameters successful process",
+    CityNotFound:"Parameters not found for your city name check your name ",
+    AddingVolunterName:" Adding Volunter Name is successful",
+    AddingPersonelName:" Adding Personel Name is successfully",
     }
     const parameterMessageValidotr={
         Name: " the value used for the filed of Name is not valid" ,

@@ -1,10 +1,10 @@
 const mongoose= require('mongoose');
 
-const SaharTeam =new Schema({
+const SaharTeam =new mongoose.Schema({
     name:{type:[String], required:true},
     day:{type:Date, required:true}
 });
-const SahabTeam = new Schema({
+const SahabTeam = new mongoose.Schema({
     countWomen:{type:String, required:true},
     countMen:{type:String, required:true},
     countPP:{type:Number, required:true},
@@ -16,11 +16,7 @@ const ProvinceObjectParametersSchema = new mongoose.Schema({
     province:{type:mongoose.Types.ObjectId,required:true,ref:"Province"},
     city:{type:mongoose.Types.ObjectId,required:true,ref:"city"},
     user:{type:mongoose.Types.ObjectId,required:true,ref:"person"},
-    SahabTeam:{type:mongoose.Types.ObjectId,required:false,ref:"SahabTeam"},
-    SahabTeam:{type:mongoose.Types.ObjectId,required:false,ref:"SaharTeam"},
     date:{type:Date,required:true},
-    SaharTeamCity:{type:SaharTeam,required:false},
-    SahabTeamCity:{type:SahabTeam,required:false},
     volunter:{type:[String] , required:false},
     personel:{type:[String] , required:false},
     num1:{type:Number,required:true},
@@ -46,8 +42,8 @@ const ProvinceObjectParametersSchema = new mongoose.Schema({
      }]
  });
 
-const SahabTeamModel=mongoose.model("SahabTeam",SahabTeam);
-const SaharTeamModel=mongoose.model("SaharTeam",SaharTeam);
+//const SahabTeamModel=mongoose.model("SahabTeam",SahabTeam);
+//const SaharTeamModel=mongoose.model("SaharTeam",SaharTeam);
 const provinceParametersModel = mongoose.model( "provinceParameters" , ProvinceObjectParametersSchema );
 
 module.exports={
