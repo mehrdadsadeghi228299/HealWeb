@@ -13,11 +13,11 @@ class parameterController{
      try {
         const {userId}=req.user;
         const {num1,num2,num3,num4,num5,num6,num7,num8,num9}=req.body;
-        const result = await this.#service.createparameter({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
+        await this.#service.createparameter({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
         return res.json({
-            message:parameterMessage.Created,
+            message:parameterMessage.,
 
-        })
+        });
      } catch (error) {
         next(error);
      }
@@ -35,8 +35,8 @@ class parameterController{
     async addSaharTeamParamter(req,res,next){
         try {
             const {name,id_parameter}=req.body;
-            const {userId}=req.user;
-            const result = await this.#service.addSaharTeamParamter(name,id_parameter);
+            const {id}=req.user;
+            const result = await this.#service.addSaharTeamParamter(name,id);
             if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
             return res.json({
                 message:result
@@ -49,8 +49,8 @@ class parameterController{
     async addSahabTeamParamter(req,res,next){
         try {
             const {countWomen,countMen,countPP,countPR,count,id_parameter}=req.body;
-            const {userId}=req.user;
-            const result = await this.#service.addSaharTeamParamter(countWomen,countMen,countPP,countPR,count,id_parameter);
+            const {id}=req.user;
+            const result = await this.#service.addSaharTeamParamter(countWomen,countMen,countPP,countPR,count,id);
             if(!result || result.error) createHttpError.NotAcceptable(parameterMessage.NotFound);;    
             return res.json({
                 message:result

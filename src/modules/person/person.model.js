@@ -22,7 +22,8 @@ const PersonSchema = new Schema({
     subProvince:{type:String , required:false},
     accessLevel:{type:String ,enum:['one','two','there'],required:true,default:'one'},
     email:{type:String , required:false},
-    CityId:{type:String, required:false, default: undefined,ref:'City'},
+    CityId:{type:Types.ObjectId, required:false, default: undefined,ref:'City'},
+    paramters:{type:Types.ObjectId, required:false, default: undefined,ref:'provinceParameters'},
     otpMobile: {type: OTPSchema}
 }
 ,{

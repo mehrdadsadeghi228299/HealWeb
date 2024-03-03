@@ -21,7 +21,7 @@ class parameterService {
     async createparameter(dto,userId) {
         const user = await this.#usermodel.findById(userId);
         if(!user) return createHttpError.MethodNotAllowed(PersonMessage.NotFound);
-        const parameters = await this.#model.create({
+        const newparameters = await this.#model.create({
             province:user.province,
             city:user.subProvince,
             user:userId,
@@ -35,8 +35,11 @@ class parameterService {
             num8:dto.num8,
             num9:dto.num9,
         });
-
-        return parameters._id.toString();
+        const addResutToUser = await this.#usermodel.updateOne({_id:user.id},{
+                                    '$set': {paramters:newparameters._id}
+                                });
+        if(!addResutToUser ||addResutToUser.error )
+        return newparameters._id.toString();
 
     }
 
@@ -54,13 +57,15 @@ class parameterService {
 
     }
 
-    async addSaharTeamParamter(id_parameter,name){
-        return this.#model.updateOne({_id:id_parameter},{
+    async addSaharTeamParamter(id,name){
+        const extractParamterId= await this.#usermodel.findById({_id:id});   
+          return this.#model.updateOne({_id:extractParamterId._id},{
              '#push':{'s.name':name}
          });
      }    
-    async addSahabTeamParamter(countWomen,countMen,countPP,countPR,count,id_parameter){
-        const result = this.#model.findById({_id:id_parameter});
+    async addSahabTeamParamter(countWomen,countMen,countPP,countPR,count,id){
+        const extractParamterId= await this.#usermodel.findById({_id:id});   
+        const result = this.#model.findById({_id:extractParamterId._id});
         result.b.countWomen=countWomen;
         result.b.countMen=countMen;
         result.b.countPP=countPP;

@@ -1,12 +1,16 @@
 
 const parameterMessage = {
 
-    Created: "category created successfully",
-    NotFound: "category not found",
-    AlreadyExist: "category already exist",
-    Deleted: "category deleted successfully",
+    Created: "Parameters created successfully",
+    CreatedParameters: " created successfully and  Add to user id ",
+    NotFound: "Parameters not found",
+    AlreadyExist: "Parameters already exist",
+    Deleted: "Parameters deleted successfully",
     IdOfParameter:"id of parameter is add successfully",
-    RequestOK:"request successful process",
+    RequestOK:"Parameters successful process",
+    RequestProcessForAddingToSaharTeam:"Parameters Adding To Sahar Team successful process",
+    RequestProcessForAddingToSahabTeam:"Parameters Adding To Sahab Team successful process",
+    RequestOK:"Parameters successful process",
     }
     const parameterMessageValidotr={
         Name: " the value used for the filed of Name is not valid" ,
