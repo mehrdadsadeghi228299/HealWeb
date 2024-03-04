@@ -78,13 +78,25 @@ class ProvinceController {
             next(error)
         }
     }
-    async postProvince (req, res, next) {
+    async CalcauteCountryLevelProvince (req, res, next) {
         try {
-            
+            const id=req.user._id;
+            const result = await this.#service.CalcauteCountryLevelProvince(id)
+
         } catch(error) {
             next(error)
         }
     }
+    async CalcauteProvinceLevel (req, res, next) {
+        try {
+            const id=req.user._id;
+            const result = await this.#service.CalcauteProvinceLevel(id)
+            return res.json({result});
+        } catch(error) {
+            next(error)
+        }
+    }
+
 }
 
 module.exports = new ProvinceController();

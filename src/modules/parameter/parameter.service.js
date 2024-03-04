@@ -4,19 +4,22 @@ const {  parameterMessage } = require("./parameter.message");
 const { PersonModel } = require("../person/person.model");
 const { PersonMessage } = require("../person/person.message");
 const { ParametersModel } = require("./parameter.model");
+const { ProvinceModel } = require("../province/province.model");
 class parameterService {
     #model;
     #usermodel;
+    #provincemodel;
     constructor () {
         autoBind(this);
         this.#model = ParametersModel ;
         this.#usermodel = PersonModel ;
+        this.#provincemodel = ProvinceModel ;
     }
     async createparameterService(dto,userId) {
         const user = await this.#usermodel.findById(userId);
         if(!user) return createHttpError.MethodNotAllowed(PersonMessage.NotFound);
-        const provincevar =user.province;
-        const cityvar =user.subProvince;
+        const provincevar = user.province;
+        const cityvar = user.subProvince;
         console.log(provincevar,cityvar,userId);
         const newparameters = await this.#model.create({
             province:provincevar,
@@ -35,7 +38,10 @@ class parameterService {
         });
         user.paramters= newparameters._id;
         await user.save();
-        return newparameters._id.toString();
+        await this.#provincemodel.updateOne({_id:provincevar.toString()},{
+            $push:{provinceParameters:newparameters._id}
+        });
+        return "success"; 
 
     }
 
@@ -63,12 +69,16 @@ class parameterService {
      }    
     async addSahabTeamParamter(countWomen,countMen,countPP,countPR,count,id){
         const extractParamterId= await this.#usermodel.findById(id.toString());   
-        const result = await this.#model.findById({_id:extractParamterId.paramters});
-        result.b.countWomen=countWomen;
-        result.b.countMen=countMen;
-        result.b.countPP=countPP;
-        result.b.countPR=countPR;
-        result.b.count=count;
+        const result = await this.#model.updateMany({_id:extractParamterId.paramters},{
+            $set:{
+                'b.countWomen':countWomen,
+                'b.countMen':countMen,
+                'b.countPP':countPP,
+                'b.countPR':countPR,
+                'b.count':count,
+            }
+        });
+
         return await result.save();
 
      }

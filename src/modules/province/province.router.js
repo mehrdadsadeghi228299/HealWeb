@@ -8,6 +8,7 @@ router.post("/create-province",Authorization,validatorProvince,provinceControlle
 router.put("/add-city",Authorization,provinceController.addCity);
 router.get("/find-province/:name",Authorization,provinceController.findMyProvince);
 router.get("/show-province/:name" ,Authorization,provinceController.showProvince);
+router.get("/province" ,Authorization,provinceController.CalcauteProvinceLevel);
 
 module.exports = {
     ProvinceRouter : router

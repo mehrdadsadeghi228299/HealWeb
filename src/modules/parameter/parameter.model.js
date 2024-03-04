@@ -16,6 +16,8 @@ const ProvinceObjectParametersSchema = new Schema({
     province:{type:Types.ObjectId,required:true,ref:'province'},
     city:{type:Types.ObjectId,required:true,ref:'citymodel'},
     user:{type:Types.ObjectId,required:true,ref:'Person'},
+    isConfirmation:{type:Boolean,required:false,default:false},
+    whoConfirmation:{type:Types.ObjectId,required:false,ref:'Person'},
     volunter:{type:[String] },
     personel:{type:[String]  },
     num1:{type:Number,required:true},

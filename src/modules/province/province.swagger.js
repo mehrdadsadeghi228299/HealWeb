@@ -61,7 +61,7 @@
  */
 /**
  * @swagger
- * /province/create-province:
+ * /province/add-city:
  *  put:
  *      summary:  Add city to a exist  Province 
  *      tags:
@@ -110,6 +110,22 @@
  *         -  in : path
  *            name : name
  *            type : string
+ *     responses:
+ *              200: 
+ *                  description: Success
+ *              400: 
+ *                  description: Bad Request
+ *              401: 
+ *                  description: Unauthorization
+ *              500: 
+ *                  description: Internal Server Error 
+ */
+/**
+ * @swagger
+ * /province/province:
+ *  get:
+ *     summary: show a province with name 
+ *     tags: [Province]
  *     responses:
  *              200: 
  *                  description: Success
