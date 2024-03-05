@@ -82,7 +82,7 @@ class ProvinceService{
         return newProvince;
     }
     async getcityWithParamter(name) {
-        const newCity = await this.#model.findOne({name:name}).populate('city');
+        const newCity = await this.#model.findOne({name:name}).populate({ path: 'city', populate:{path:'paramters' }});
         if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newCity;
     }    
@@ -99,7 +99,7 @@ class ProvinceService{
                 __v:0
             }
         },{
-            
+
         }
         )
         if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
