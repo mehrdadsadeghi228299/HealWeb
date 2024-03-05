@@ -5,15 +5,18 @@ const { PersonModel } = require("../person/person.model");
 const { PersonMessage } = require("../person/person.message");
 const { ParametersModel } = require("./parameter.model");
 const { ProvinceModel } = require("../province/province.model");
+const { CityModel } = require("../city/city.model");
 class parameterService {
     #model;
     #usermodel;
     #provincemodel;
+    #citymodel;
     constructor () {
         autoBind(this);
         this.#model = ParametersModel ;
         this.#usermodel = PersonModel ;
         this.#provincemodel = ProvinceModel ;
+        this.#citymodel = CityModel ;
     }
     async createparameterService(dto,userId) {
         const user = await this.#usermodel.findById(userId);
@@ -40,6 +43,9 @@ class parameterService {
         await user.save();
         await this.#provincemodel.updateOne({_id:provincevar.toString()},{
             $push:{provinceParameters:newparameters._id}
+        });
+        await this.#citymodel.updateOne({_id:cityvar.toString()},{
+            $push:{paramters:newparameters._id}
         });
         return "success"; 
 

@@ -120,6 +120,27 @@
  *              500: 
  *                  description: Internal Server Error 
  */
+
+/**
+ * @swagger
+ * /province/get-city/{name}:
+ *  get:
+ *     summary: get city a province with name 
+ *     tags: [Province]
+ *     parameters:
+ *         -  in : path
+ *            name : name
+ *            type : string
+ *     responses:
+ *              200: 
+ *                  description: Success
+ *              400: 
+ *                  description: Bad Request
+ *              401: 
+ *                  description: Unauthorization
+ *              500: 
+ *                  description: Internal Server Error 
+ */
 /**
  * @swagger
  * /province/province:

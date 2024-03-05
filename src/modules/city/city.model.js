@@ -7,8 +7,10 @@ const CitySchema = new Schema({
     lat:{type:String , required:true},
     lng:{type:String , required:true},
     key:{type:Number , required:true},
-    paramters:{type:Types.ObjectId , required:false,ref:'provinceParameters'},
+    paramters:{type:[Types.ObjectId],required:false,ref:'provinceParameters'},
 
+},{
+    timestamps:true
 });
 
 const CityModel = model("citymodel", CitySchema);

@@ -96,6 +96,15 @@ class ProvinceController {
             next(error)
         }
     }
+    async getcityWithParamter (req, res, next) {
+        try {
+            const {name}=req.params;
+            const result = await this.#service.getcityWithParamter(name);
+            return res.json({result});
+        } catch(error) {
+            next(error)
+        }
+    }
 
 }
 

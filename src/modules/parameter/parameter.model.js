@@ -41,6 +41,9 @@ const ProvinceObjectParametersSchema = new Schema({
         day:Date,
      }]
 
+ },{
+    timestamps:true
+
  });
 
 //const SahabTeamModel=mongoose.model("SahabTeam",SahabTeam);

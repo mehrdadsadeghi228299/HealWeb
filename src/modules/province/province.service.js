@@ -9,7 +9,7 @@ class ProvinceService{
     #usermodel;
     constructor () {
         autoBind(this);
-        this.#model = ProvinceModel
+        this.#model = ProvinceModel;
         this.#usermodel=PersonModel;
         }
     async createProvince (dto) {
@@ -27,7 +27,7 @@ class ProvinceService{
          */
     }
     async showProvince (name) {
-        const newProvince = await this.#model.findOne({name}).populate('city');
+        const newProvince = await this.#model.findOne({name:name}).populate('city');
         if(newProvince) createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newProvince;
     }
@@ -39,7 +39,20 @@ class ProvinceService{
     }
     async CalcauteCountryLevelProvince (id) {
         const user= await this.#usermodel.findById(id).populate('ProvinceParameters');
-        user.city
+        const  sumRowElemens=(matrix) =>{
+            var result = [];
+            for (var i = 0; i < matrix.length; i++) {
+                var rowSum = 0;
+                for (var j = 0; j < matrix[i].length; j++) {
+                    rowSum += matrix[i][j];
+                }
+                result.push(rowSum);
+            }
+        
+            return result;
+        }      
+        var rowSums = sumRowElemens(allNum);
+        console.log("جمع خانه‌های هر سطر:", rowSums);  
         const result=await this.checkProvinceExists(id);
     }
     async CalcauteProvinceLevel(id) {
@@ -49,36 +62,48 @@ class ProvinceService{
             return [item.num1,item.num2,item.num3,item.num4,item.num5,item.num6,item.num7,item.num8,item.num9]
         }
         const allNum = province.provinceParameters.map(fe);
-        const array=[];
-        for (const iterator of allNum) {
-            console.log(iterator);
-            for (const it of iterator) {
-                console.log(it);
-                array.push(it);
-            }
-        }
-        const fa =(matrix)=>{
-            let rows =2;
-            let cols =8; 
-            let total =[];
-            for (let i in rows){
-                for (let j in cols) {
-                  total +=rows[i][j];
-                  console.log(total);
+        const  sumColumns=(matrix) =>{
+            var rows = matrix.length;
+            var cols = matrix[0].length || 0;
+            var columnSums = new Array(cols).fill(0);
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < cols; j++) {
+                    columnSums[j] += matrix[i][j];
                 }
             }
+            return columnSums;
         }
-        const result = fa(allNum)
-        console.log(result);
-        console.log(array);
-        return allNum 
-
+        let resultsumColumns = sumColumns(allNum);
+        return resultsumColumns 
     }
-    async checkProvinceExists (name) {
+    async checkProvinceExists(name) {
         const newProvince = await this.#model.findOne({name});
         if(newProvince) createHttpError.NotFound(ProvinceMessage.BADVALUE);
-        return  newProvince;
-
+        return newProvince;
+    }
+    async getcityWithParamter(name) {
+        const newCity = await this.#model.findOne({name:name}).populate('city');
+        if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+        return newCity;
+    }    
+    async getcityWithParamterAggretion(name) {
+        const newCity = await this.#model.aggregate(
+           { 
+            $Math:{
+                name: name
+            }
+        },
+        
+        { 
+            $project:{
+                __v:0
+            }
+        },{
+            
+        }
+        )
+        if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+        return newCity;
     }
 }
 

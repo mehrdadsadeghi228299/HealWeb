@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const Authorization = require("../../common/guard/authorization.guard");
+const {Authorization} = require("../../common/guard/authorization.guard");
 const { AuthController } = require("./auth.controller");
 const router = Router();
 router.post("/send-otp", AuthController.sendOTP);
