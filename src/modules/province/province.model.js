@@ -16,6 +16,11 @@ const ProvinceSchema = new Schema({
 },{
     timestamps:true
 });
+ProvinceSchema.virtual('citydata', {
+    ref: 'citymodel',
+    localField: '_id',
+    foreignField: 'city'
+  });
 
 
 const ProvinceModel = model( "province" , ProvinceSchema );

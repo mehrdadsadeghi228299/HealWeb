@@ -60,9 +60,9 @@ class ProvinceService{
         const province = await this.#model.findById(user.province,{provinceParameters:1}).populate('provinceParameters');
         const fe=(item)=>{
             return [item.num1,item.num2,item.num3,item.num4,item.num5,item.num6,item.num7,item.num8,item.num9]
-        }
-        const allNum = province.provinceParameters.map(fe);
-        const  sumColumns=(matrix) =>{
+            }
+        const  allNum = province.provinceParameters.map(fe);
+        const  sumColumns = (matrix) =>{
             var rows = matrix.length;
             var cols = matrix[0].length || 0;
             var columnSums = new Array(cols).fill(0);
@@ -75,22 +75,23 @@ class ProvinceService{
         }
         let resultsumColumns = sumColumns(allNum);
         return resultsumColumns 
-    }
+    }     
     async checkProvinceExists(name) {
         const newProvince = await this.#model.findOne({name});
         if(newProvince) createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newProvince;
-    }
+        //{path:'paramters',populate:'city'}
+    }         
     async getcityWithParamter(name) {
-        const newCity = await this.#model.findOne({name:name}).populate({ path: 'city', populate:{path:'paramters' }});
+        const newCity = await this.#model.findOne({name:name}).populate('city.paramters');
         if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
-        return newCity;
-    }    
+        return newCity; 
+    }     
     async getcityWithParamterAggretion(name) {
         const newCity = await this.#model.aggregate(
            { 
-            $Math:{
-                name: name
+            $Math:{ 
+                name: name 
             }
         },
         
