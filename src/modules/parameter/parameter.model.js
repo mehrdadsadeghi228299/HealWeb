@@ -20,6 +20,7 @@ const ProvinceObjectParametersSchema = new Schema({
     whoConfirmation:{type:Types.ObjectId,required:false,ref:'Person'},
     volunter:{type:[String] },
     personel:{type:[String]  },
+    isAccepted:{type:Boolean,required:false,default:false},
     num1:{type:Number,required:true},
     num2:{type:Number,required:true},
     num3:{type:Number,required:true},
@@ -39,7 +40,8 @@ const ProvinceObjectParametersSchema = new Schema({
         countPR:Number,
         count:Number,
         day:Date,
-     }]
+     }],
+     date:{type:Date,required:true}
 
  },{
     timestamps:true

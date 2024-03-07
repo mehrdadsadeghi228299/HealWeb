@@ -23,11 +23,13 @@ class parameterService {
         if(!user) return createHttpError.MethodNotAllowed(PersonMessage.NotFound);
         const provincevar = user.province;
         const cityvar = user.subProvince;
+        const date=new Date()
         console.log(provincevar,cityvar,userId);
         const newparameters = await this.#model.create({
             province:provincevar,
             city:cityvar,
             user:userId,
+            date:date,
             num1:dto.num1,
             num2:dto.num2,
             num3:dto.num3,

@@ -84,6 +84,7 @@ class ProvinceService{
     }         
     async getcityWithParamter(name) {
         const newCity = await this.#model.findOne({name:name}).populate('city.paramters');
+            //const extract = await this.#.find([])
         if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newCity; 
     }     
