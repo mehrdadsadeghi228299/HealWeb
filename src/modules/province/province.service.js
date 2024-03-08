@@ -36,10 +36,10 @@ class ProvinceService{
         return newProvince;
     }
     async addCity(name,cityId) {
-        const result=await this.checkProvinceExists(name);
-        result.city.push(cityId);
-        await result.save();
-        return "OK";
+        const result=await this.#model.updateOne({name:name},{
+             $push:{city:cityId}
+        });
+        return "OK"+result;
     }
     async CalcauteCountryLevelProvince (id) {
         const user= await this.#usermodel.findById(id).populate('ProvinceParameters');

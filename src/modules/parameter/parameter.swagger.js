@@ -4,7 +4,7 @@
  *  name: Paramters
  *  description: Paramters Modules and Routes
  */
-
+ 
 /**
  * @swagger
  *  components:
@@ -185,19 +185,19 @@
  */
 /**
  * @swagger
- * /paramters/update-paramter:
+ * /paramters/add-volunter:
  *  put:
- *      summary: update  a exist  paramters
+ *      summary: update  a exist  paramters for adding a volunter
  *      tags:
  *          -   Paramters
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: '#/components/schemas/UpdateParamters'
+ *                      $ref: '#/components/schemas/Addvolunteries'
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/UpdateParamters'
+ *                      $ref: '#/components/schemas/Addvolunteries'
  *      responses:
  *          201:
  *              description: update success
