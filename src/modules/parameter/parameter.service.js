@@ -52,22 +52,40 @@ class parameterService {
         return "success"; 
 
     }
+    async updateparameterService(dto,id,userId) {
+        const user = await this.#usermodel.findById(userId);       
+        const parameters = await this.#model.updateMany({_id:id},{
+            num1:dto.num1,
+            num2:dto.num2,
+            num3:dto.num3,
+            num4:dto.num4,
+            num5:dto.num5,
+            num6:dto.num6,
+            num7:dto.num7,
+            num8:dto.num8,
+            num9:dto.num9,  
+        }) 
+        
+        return "success"; 
 
+    }
     async findMyparameterANDShow(city) {
         const parametersCity = await this.#model.find({city:city});
         if(!parametersCity|| parametersCity.error) createHttpError.NotAcceptable(parameterMessage.CityNotFound);
         return parametersCity;
     }
-
-
-
+    async conformationPrarmter(id){
+    const result = await this.#model.updateOne({_id:id},{
+        isConfirmation:true
+    });
+    return result.json();
+    }
     async checkExistCity(name){
         const result = await this.#model.findOne({name});
         if(!result) createHttpError.NotFound(parameterMessage.NotFound);
         return   result 
 
     }
-
     async addSaharTeamParamter(name,id){
         const extractParamterId= await this.#usermodel.findById(id.toString());   
         const resultForupdate=await this.#model.findById(extractParamterId.paramters.toString());

@@ -6,7 +6,7 @@ class parameterController{
     #service;
     constructor () {
         autoBind(this);
-        this.#service =parameterService ;
+        this.#service = parameterService ;
     }
     async createparameter(req, res, next) {
      try {
@@ -15,12 +15,22 @@ class parameterController{
         await this.#service.createparameterService({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
         return res.json({
             message:parameterMessage.CreatedParameters,
-
         });
      } catch (error) {
         next(error);
      }
-
+    }
+    async updateparameter(req,res,next){
+        try {
+            const userId=req.user._id;
+            const {num1,num2,num3,num4,num5,num6,num7,num8,num9,id}=req.body;
+            await this.#service.updateparameterService({num1,num2,num3,num4,num5,num6,num7,num8,num9},id,userId);
+            return res.json({
+                message:parameterMessage.Updated,
+            });
+         } catch (error) {
+            next(error);
+         }        
     }
     async findMyparameterANDShow(req, res,next) {
         try {
@@ -35,7 +45,6 @@ class parameterController{
         }
 
     }
-
     async addSaharTeamParamter(req,res,next){
         try {
             const {name}=req.body;
@@ -50,7 +59,6 @@ class parameterController{
             next(error);
         }
     }
-
     async addSahabTeamParamter(req,res,next){
         try {
             const {countWomen,countMen,countPP,countPR,count}=req.body;
@@ -64,7 +72,6 @@ class parameterController{
             next(error);
         }
     }
-
     async addvolunteries(req, res,next) {
     try {
         const id=req.user._id;
@@ -91,5 +98,19 @@ class parameterController{
         next(error);
     }
     }
+    async conformationPrarmter(req, res,next) {
+        try {
+
+            const {id}=req.body;
+            const result = await this.#service.conformationPrarmter(id);
+            return result.json({
+                message:parameterMessage.isConfirmation,
+                result:result,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+    
 }
 module.exports = new parameterController();

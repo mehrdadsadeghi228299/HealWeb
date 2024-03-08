@@ -40,6 +40,40 @@
  *                     type: number
  *                  num9:
  *                     type: number
+ *          UpdateParamters:
+ *              type: object  
+ *              required:
+ *                    -    id
+ *                    -    num1
+ *                    -    num2
+ *                    -    num3
+ *                    -    num4
+ *                    -    num5
+ *                    -    num6
+ *                    -    num7
+ *                    -    num8
+ *                    -    num9
+ *              properties:
+ *                  id:
+ *                     type: string
+ *                  num1:
+ *                     type: number
+ *                  num2:
+ *                     type: number
+ *                  num3:
+ *                     type: number
+ *                  num4:
+ *                     type: number
+ *                  num5:
+ *                     type: number
+ *                  num6:
+ *                     type: number
+ *                  num7:
+ *                     type: number
+ *                  num8:
+ *                     type: number
+ *                  num9:
+ *                     type: number
  *          Addvolunteries:
  *              type: object
  *              required:
@@ -47,6 +81,13 @@
  *              properties:
  *                  name:
  *                     type: array 
+ *          ConfirmationParamter:
+ *              type: object
+ *              required:
+ *                  -   id
+ *              properties:
+ *                  id:
+ *                     type: string 
  *          AddPersonel:
  *              type: object
  *              required:
@@ -101,21 +142,62 @@
  *          200:
  *              description: success
  */
+
+
 /**
  * @swagger
- * /paramters/add-volunter:
+ * /paramters/update-paramter:
  *  put:
- *      summary: add volunter Team to a exist  paramters
+ *      summary: update a exist paramters
  *      tags:
  *          -   Paramters
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: '#/components/schemas/Addvolunteries'
+ *                      $ref: '#/components/schemas/UpdateParamters'
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/Addvolunteries'
+ *                      $ref: '#/components/schemas/UpdateParamters'
+ *      responses:
+ *          201:
+ *              description: update success
+ */
+ 
+/**
+ * @swagger
+ * /paramters/conformation-paramter:
+ *  put:
+ *      summary: update  a exist  paramters
+ *      tags:
+ *          -   Paramters
+ *      requestBody:
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema:
+ *                      $ref: '#/components/schemas/ConfirmationParamter'
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/ConfirmationParamter'
+ *      responses:
+ *          201:
+ *              description: update success
+ */
+/**
+ * @swagger
+ * /paramters/update-paramter:
+ *  put:
+ *      summary: update  a exist  paramters
+ *      tags:
+ *          -   Paramters
+ *      requestBody:
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema:
+ *                      $ref: '#/components/schemas/UpdateParamters'
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/UpdateParamters'
  *      responses:
  *          201:
  *              description: update success

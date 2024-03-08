@@ -2,6 +2,8 @@
 const parameterMessage = {
 
     Created: "Parameters created successfully",
+    Updated: "Parameters updated successfully",
+    isConfirmation:"Parameters confirmation ",
     CreatedParameters: " created successfully and  Add to user id ",
     NotFound: "Parameters not found",
     AlreadyExist: "Parameters already exist",
