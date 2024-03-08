@@ -131,6 +131,10 @@ class ProvinceService{
         return user;
 
     }
+    async getEveryThings(){
+        const result =await this.#model.find().populate('city');
+        return result
+    }
 }
 
 module.exports = new ProvinceService();

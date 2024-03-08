@@ -11,6 +11,7 @@ router.get("/show-province/:name" ,Authorization,provinceController.showProvince
 router.get("/get-city/:name" ,Authorization,CheckRole('admin'),provinceController.getcityWithParamter);
 router.get("/get-city/" ,Authorization,CheckRole('admin'),provinceController.getcityWithParamterAsuserId);
 router.get("/province" ,Authorization,provinceController.CalcauteProvinceLevel);
+router.get("/province-all" ,Authorization,provinceController.getEveryThings);
 
 module.exports = {
     ProvinceRouter : router

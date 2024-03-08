@@ -157,11 +157,12 @@
  *              500: 
  *                  description: Internal Server Error 
  */
+
 /**
  * @swagger
- * /province/province:
+ * /province/province-all:
  *  get:
- *     summary: show a province with name 
+ *     summary: get All data  
  *     tags: [Province]
  *     responses:
  *              200: 

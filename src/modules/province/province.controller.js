@@ -123,6 +123,18 @@ class ProvinceController {
             next(error)
         }
     }
+    async getEveryThings(req, res,next) {
+        try {
+            const result = await this.#service.getEveryThings();
+            return res.json({
+                message:ProvinceMessage.SERACH,
+                result:result
+            });
+            
+        } catch (error) {
+            next(error);
+        }
+    }
 
 }
 
