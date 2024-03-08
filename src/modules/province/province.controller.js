@@ -135,6 +135,18 @@ class ProvinceController {
             next(error);
         }
     }
+    async getAllparamter(req, res,next) {
+        try {
+            const result = await this.#service.getAllparamter();
+            return res.json({
+                message:ProvinceMessage.SERACH,
+                result:result
+            });
+            
+        } catch (error) {
+            next(error);
+        }
+    }
 
 }
 

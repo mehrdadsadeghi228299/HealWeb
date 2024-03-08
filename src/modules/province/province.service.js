@@ -135,6 +135,10 @@ class ProvinceService{
         const result =await this.#model.find().populate('city');
         return result
     }
+    async getAllparamter(){
+        const result =await this.#model.find().populate('provinceParameters');
+        return result
+    }
 }
 
 module.exports = new ProvinceService();

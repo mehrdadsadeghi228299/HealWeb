@@ -174,3 +174,20 @@
  *              500: 
  *                  description: Internal Server Error 
  */
+
+/**
+ * @swagger
+ * /province/province-all-paramters:
+ *  get:
+ *     summary: get All data  
+ *     tags: [Province]
+ *     responses:
+ *              200: 
+ *                  description: Success
+ *              400: 
+ *                  description: Bad Request
+ *              401: 
+ *                  description: Unauthorization
+ *              500: 
+ *                  description: Internal Server Error 
+ */
