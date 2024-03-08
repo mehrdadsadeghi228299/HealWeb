@@ -10,6 +10,7 @@ function SwaggerConfig (app) {
                 description: "level one if Projects",
                 version: "0.1.0",
             },
+            
             servers: [
                 {
                   url: "http://localhost:3000",
@@ -18,6 +19,7 @@ function SwaggerConfig (app) {
                   url: "http://localhost:5000",
                 },
               ],
+              
               components : {
                 securitySchemes : {
                   BearerAuth : {
@@ -36,4 +38,5 @@ function SwaggerConfig (app) {
     const swagger = swaggerUi.setup(swaggerDocument, {});
     app.use("/swagger", swaggerUi.serve, swagger);
 }
+
 module.exports = SwaggerConfig;

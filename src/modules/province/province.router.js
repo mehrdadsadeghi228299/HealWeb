@@ -9,6 +9,7 @@ router.put("/add-city",Authorization,provinceController.addCity);
 router.get("/find-province/:name",Authorization,provinceController.findMyProvince);
 router.get("/show-province/:name" ,Authorization,provinceController.showProvince);
 router.get("/get-city/:name" ,Authorization,CheckRole('admin'),provinceController.getcityWithParamter);
+router.get("/get-city/" ,Authorization,CheckRole('admin'),provinceController.getcityWithParamterAsuserId);
 router.get("/province" ,Authorization,provinceController.CalcauteProvinceLevel);
 
 module.exports = {

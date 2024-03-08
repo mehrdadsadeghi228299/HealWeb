@@ -4,17 +4,20 @@ const createHttpError = require("http-errors");
 const { ProvinceModel } = require("./province.model");
 const { ProvinceMessage } = require("./province.message");
 const { PersonModel } = require("../person/person.model");
+const { CityModel } = require("../city/city.model");
 class ProvinceService{
     #model;
     #usermodel;
+    #city;
     constructor () {
         autoBind(this);
         this.#model = ProvinceModel;
-        this.#usermodel=PersonModel;
+        this.#usermodel = PersonModel;
+        this.#city = CityModel;
         }
     async createProvince (dto) {
         const newProvince = await this.#model.create(dto);
-        if(newProvince.errors) createHttpError.NotAcceptable(ProvinceMessage.BADVALUE);
+        if(newProvince.errors || !newProvince) return createHttpError.NotAcceptable(ProvinceMessage.BADVALUE);
         return newProvince;
     }
 
@@ -26,9 +29,10 @@ class ProvinceService{
          * Level 2
          */
     }
-    async showProvince (name) {
-        const newProvince = await this.#model.findOne({name:name}).populate('city');
-        if(newProvince) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+    async showProvince (id,name) {
+        const newProvince = await this.#model.find({name:name}).populate('city');
+        //const provincewithParamter=await this.#city.find({})
+        if(!newProvince) return createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newProvince;
     }
     async addCity(name,cityId) {
@@ -78,34 +82,54 @@ class ProvinceService{
     }     
     async checkProvinceExists(name) {
         const newProvince = await this.#model.findOne({name});
-        if(newProvince) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+        if(newProvince) return createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newProvince;
-        //{path:'paramters',populate:'city'}
+        //{path:'paramters',populate:'city'}       
     }         
-    async getcityWithParamter(name) {
-        const newCity = await this.#model.findOne({name:name}).populate('city.paramters');
-            //const extract = await this.#.find([])
-        if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+    async getcityWithParamterAsId(id) {
+        const user = await this.#usermodel.findById(id,{CityId:1,subProvince:1}).populate("subProvince");
+        const city = await this.#city.find({_id:user.CityId}).populate('paramters');
+        if(!city || city.errors) return createHttpError.NotFound(ProvinceMessage.BADVALUE);
+        return city; 
+    }    
+    async getcityWithParamter(id,name) {
+        const user = await this.CheckYourLevelInPorince(id,name)
+        const city = await this.#model.findById(user.province);
+        const c=city.city.map(({_id})=> _id );
+        const newCity=await this.#city.find({_id:{$in:c}}).populate('paramters');
+        if(!newCity) return createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newCity; 
-    }     
+    }  
     async getcityWithParamterAggretion(name) {
-        const newCity = await this.#model.aggregate(
+        const newCity = await this.#model.aggregate([
            { 
-            $Math:{ 
+            $match:{ 
                 name: name 
             }
         },
-        
+        { $lookup:{ from: 'city', localField: 'city', foreignField: '_id', as: 'city' 
+        }
+            },        
+            {
+                $unwind: "$citymodel"
+            },
+
         { 
             $project:{
                 __v:0
             }
-        },{
+        },
 
-        }
-        )
-        if(newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
+        ]);
+        if(!newCity) createHttpError.NotFound(ProvinceMessage.BADVALUE);
         return newCity;
+    }
+    async CheckYourLevelInPorince(id,name){
+        const user = await this.#usermodel.findById(id).populate('province');
+        if(!user) return createHttpError.NotFound(ProvinceMessage.NotFound);
+        if(user.province==name) return createHttpError.NotFound(ProvinceMessage.YourInput);
+        return user;
+
     }
 }
 

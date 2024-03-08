@@ -123,6 +123,22 @@
 
 /**
  * @swagger
+ * /province/get-city/:
+ *  get:
+ *     summary: get city a province with Own cookies 
+ *     tags: [Province]
+ *     responses:
+ *              200: 
+ *                  description: Success
+ *              400: 
+ *                  description: Bad Request
+ *              401: 
+ *                  description: Unauthorization
+ *              500: 
+ *                  description: Internal Server Error 
+ */
+/**
+ * @swagger
  * /province/get-city/{name}:
  *  get:
  *     summary: get city a province with name 

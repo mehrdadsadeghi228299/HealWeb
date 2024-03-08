@@ -68,8 +68,9 @@ class ProvinceController {
     }
     async showProvince (req, res, next) {
         try {
+            const id = req.user._id;
             const {name} = req.params;
-            const result =await this.#service.showProvince(name);
+            const result =await this.#service.showProvince(id,name);
             return res.json({
                 message:ProvinceMessage.SERACH,
                  result:result
@@ -98,9 +99,26 @@ class ProvinceController {
     }
     async getcityWithParamter (req, res, next) {
         try {
+            const id = req.user._id;
             const {name}=req.params;
-            const result = await this.#service.getcityWithParamter(name);
-            return res.json({result});
+            const result = await this.#service.getcityWithParamter(id,name);
+            return res.json({
+                message:ProvinceMessage.SERACH,
+                 result:result
+            });
+        } catch(error) {
+            next(error)
+        }
+    }
+    async getcityWithParamterAsuserId (req, res, next) {
+        try {
+            const id=req.user._id;
+            console.log(id);
+            const result = await this.#service.getcityWithParamter(id);
+            return res.json({
+                message:ProvinceMessage.SERACH,
+                 result:result
+            });
         } catch(error) {
             next(error)
         }
