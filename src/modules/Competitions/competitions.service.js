@@ -26,7 +26,7 @@ class CompetitionsService {
         if(!cityAnwser) return createHttpError.NotAcceptable(CompetitionsMessage.NotFound+' City name');
         const result = await this.#model.create({
             titleCompetitions:title,
-            nameVolunter:dto.name,
+            nameVolunter:name,
             description:description,
             informationofVolunter:information,
             cityname:cityname,
@@ -37,22 +37,23 @@ class CompetitionsService {
 
        
     }
-    async findByCompetitionsTitle(competitions) {
-        return await this.checkExistCompetitions(competitions)
+    async findByCompetitionsTitle(title) {
+        return await this.checkExistCompetitions(title)
 
     }
     async findCompetitionsByCity(city) {
-        const result = await this.#model.findOne({cityname:city});
+        const result = await this.#model.find({cityname:city});
         if(!result) return createHttpError.NotFound(CompetitionsMessage.NotFound);
         return result 
     }   
-     async findCompetitionsByNameVolunter(namevolunter) {
-        const result = await this.#model.findOne({nameVolunter:namevolunter});
+     async findCompetitionsByNameVolunter(name) {
+        const result = await this.#model.find({nameVolunter:name});
         if(!result) return createHttpError.NotFound(CompetitionsMessage.NotFound);
         return result 
     }
-    async chooseWinner(namevolunter,id) {
-        const result = await this.#model.updateMany({nameVolunter:namevolunter},{
+    async chooseWinner(name,title,id) {
+        console.log(name,title);
+        const result = await this.#model.updateMany({nameVolunter:name,titleCompetitions:title},{
             wnier:true,
             whoSetWinner:id
         });
@@ -67,7 +68,7 @@ class CompetitionsService {
     }
 
     async checkExistCompetitions(name){
-        const result = await this.#model.findOne({titleCompetitions:name});
+        const result = await this.#model.find({titleCompetitions:name});
         if(!result)  return createHttpError.NotFound(CompetitionsMessage.NotFound);
         return result 
 

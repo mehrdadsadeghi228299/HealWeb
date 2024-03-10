@@ -33,8 +33,8 @@ class CompetitionsController {
 
     async findByCompetitionsTitle(req, res, next) {
        try {
-        const competitions=req.params.competitions;
-        const result = await this.#service.findByCompetitionsTitle(competitions);
+        const title=req.params.title;
+        const result = await this.#service.findByCompetitionsTitle(title);
         return res.json({
             message : CompetitionsMessage.RequestOK,
             result : result
@@ -59,8 +59,8 @@ class CompetitionsController {
     }
     async findCompetitionsByNameVolunter(req, res, next) {
         try {
-            const namevolunter = req.params.namevolunter;
-            const result = await this.#service.findCompetitionsByNameVolunter(namevolunter);
+            const name = req.params.name;
+            const result = await this.#service.findCompetitionsByNameVolunter(name);
             return res.json({
                 message : CompetitionsMessage.RequestOK,
                 result : result ,
@@ -84,8 +84,9 @@ class CompetitionsController {
     async chooseWinner(req, res, next) {
         try {
             const id =req.user._id;
-            const namevolunter = req.params.namevolunter;
-            const result = await this.#service.chooseWinner(namevolunter,id);
+
+            const {title,name} = req.body;
+            const result = await this.#service.chooseWinner(name,title,id);
             return res.json({
                 message : CompetitionsMessage.SetWinner,
                 result : result ,

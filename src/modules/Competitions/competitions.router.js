@@ -4,13 +4,13 @@ const {upload} =require('../../common/utils/multer');
 const { CompetitionsValidator } = require('./competitions.validator');
 const router = require('express').Router();
 
-router.post("/create-competitions",CompetitionsValidator,competitionsController.createCompetitions);
-router.get("/find-competitions/:city",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByCity);
-router.get("/find-competitions/:title",Authorization,CheckRole('admin','updater'),competitionsController.findByCompetitionsTitle);
-router.get("/find-competitions/:nameVolunter",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByNameVolunter);
-router.get("/choose-competitions/:nameVolunter",Authorization,CheckRole('admin','updater'),competitionsController.chooseWinner);
-router.get("/show-competitions",Authorization,CheckRole('admin','updater','creator'),competitionsController.showAllCompetitions);
-router.get("/winner-competitions",Authorization,CheckRole('admin','updater'),competitionsController.getAllWiner);
+router.post("/create-competitions",CompetitionsValidator,Authorization,CheckRole('admin','creator'),upload.array("images", 10),competitionsController.createCompetitions);
+router.get("/find-city-competitions/:city",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByCity);
+router.get("/find-title-competitions/:title",Authorization,CheckRole('admin','updater'),competitionsController.findByCompetitionsTitle);
+router.get("/find-name-competitions/:name",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByNameVolunter);
+router.put("/choose-competitions",Authorization,CheckRole('admin','updater'),competitionsController.chooseWinner);
+router.get("/show-competitions",Authorization,CheckRole('admin','updater','normal'),competitionsController.showAllCompetitions);
+router.get("/winner-competitions",Authorization,CheckRole('admin','updater','normal'),competitionsController.getAllWiner);
 
 
 module.exports = {

@@ -31,7 +31,17 @@
  *                    type: string
  *                  images:
  *                    type: file
- */
+ *         chooseWinner:
+ *             type: object
+ *             required:
+ *                  -    title
+ *                  -    name
+ *             properties:
+ *                  title:
+ *                    type: string
+ *                  name:
+ *                    type: string 
+ */            
 /**
  * @swagger
  *  /competitions/create-competitions:
@@ -47,26 +57,25 @@
  *          200:
  *              description: success
  */
-
-
 /**
  * @swagger
- * /competitions/choose-competitions/{nameVolunter}:
- * get:
+ *  /competitions/choose-competitions/:
+ *   put:
  *      summary: choose the winner to nameVolunter 
  *      tags: [Competitions]
- *      parameters:
- *         -  in : path
- *            name : nameVolunter
- *            type : string
+ *      requestBody:
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema:
+ *                      $ref: '#/components/schemas/chooseWinner'
  *      responses:
- *          201:
- *              description: update success
+ *          200:
+ *              description: success
  */
 
 /**
  * @swagger
- * /competitions/find-competitions/{city}:
+ * /competitions/find-city-competitions/{city}:
  *  get:
  *     summary: find-competitions with 
  *     tags: [Competitions]
@@ -86,7 +95,7 @@
  */
 /**
  * @swagger
- * /competitions/find-competitions/{title}:
+ * /competitions/find-title-competitions/{title}:
  *  get:
  *     summary: find-competitions with 
  *     tags: [Competitions]
@@ -106,13 +115,13 @@
  */
 /**
  * @swagger
- * /competitions/find-competitions/{nameVolunter}:
+ * /competitions/find-name-competitions/{name}:
  *  get:
  *     summary: find-competitions with 
  *     tags: [Competitions]
  *     parameters:
  *         -  in : path
- *            name : nameVolunter
+ *            name : name
  *            type : string
  *     responses:
  *              200: 
