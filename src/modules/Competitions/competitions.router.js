@@ -4,7 +4,7 @@ const {upload} =require('../../common/utils/multer');
 const { CompetitionsValidator } = require('./competitions.validator');
 const router = require('express').Router();
 
-router.post("/create-competitions",CompetitionsValidator,Authorization,CheckRole('admin','creator'),upload.array("images", 10),competitionsController.createCompetitions);
+router.post("/create-competitions",CompetitionsValidator,Authorization,CheckRole('admin','creator'),upload.array("images", 3),competitionsController.createCompetitions);
 router.get("/find-city-competitions/:city",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByCity);
 router.get("/find-title-competitions/:title",Authorization,CheckRole('admin','updater'),competitionsController.findByCompetitionsTitle);
 router.get("/find-name-competitions/:name",Authorization,CheckRole('admin','updater'),competitionsController.findCompetitionsByNameVolunter);

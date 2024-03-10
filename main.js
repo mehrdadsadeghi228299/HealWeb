@@ -8,6 +8,9 @@ const { NotFoundHandler } = require('./src/common/exception/not-found.handler');
 const { AllExceptionHandler } = require('./src/common/exception/all-exception.handler');
 const { AllRoutes } = require('./src/routes');
 const SwaggerConfig = require('./src/config/swagger.config');
+const moment = require('jalali-moment');
+const methodOverride = require("method-override");
+
 dotenv.config();
 const port=process.env.PORT;
 const cookiesecretekey=process.env.cookiesecretekey;
@@ -20,9 +23,11 @@ async function main(){
     app.use(cookieParser(cookiesecretekey));
     app.set("view engine", "ejs");
     app.set(express.static("public"))
+    app.use(methodOverride('_method'));
     app.set("layout","./layout/panel/main.ejs");
     app.use(expressEjsLayouts)
     app.use(AllRoutes);
+    app.locals.moment = moment;
     app.use(morgan("dev"));
     NotFoundHandler(app);
     AllExceptionHandler(app);

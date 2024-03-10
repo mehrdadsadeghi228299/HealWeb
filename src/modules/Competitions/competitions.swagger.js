@@ -8,7 +8,7 @@
 /**
  * @swagger
  *  components:
- *     schemas:
+ *      schemas:
  *         CreateCompetitions:
  *             type: object  
  *             required:
@@ -17,20 +17,19 @@
  *                  -    description
  *                  -    information
  *                  -    cityname
- *                  -    images
  *             properties:
  *                  title:
- *                    type: string
+ *                     type: string
  *                  name:
- *                    type: string
+ *                     type: string
  *                  description:
- *                    type: string
+ *                     type: string
  *                  information:
- *                    type: object
+ *                     type: object
  *                  cityname:
- *                    type: string
- *                  images:
- *                    type: file
+ *                     type: string
+ *                  image:
+ *                     type: file
  *         chooseWinner:
  *             type: object
  *             required:
@@ -40,26 +39,31 @@
  *                  title:
  *                    type: string
  *                  name:
- *                    type: string 
- */            
+ *                    type: string
+ */
+ 
 /**
  * @swagger
- *  /competitions/create-competitions:
- *   post:
- *      summary: Create a new Competitions 
+ * /competitions/create-competitions:
+ *  post:
+ *      summary: Create a new Competitions
  *      tags: [Competitions]
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
  *                      $ref: '#/components/schemas/CreateCompetitions'
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/CreateCompetitions'
  *      responses:
  *          200:
  *              description: success
- */
+ */ 
+
 /**
  * @swagger
- *  /competitions/choose-competitions/:
+ *  /competitions/choose-competitions:
  *   put:
  *      summary: choose the winner to nameVolunter 
  *      tags: [Competitions]

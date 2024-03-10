@@ -12,12 +12,6 @@ class CompetitionsController {
     }
     async createCompetitions(req, res, next) {
         try {
-            console.log("some ",utf.decode(req.body));
-            console.log(req.body.cityname);
-            console.debug(req.body.name);
-
-       
-            console.log(req.body.title);
             const {title,name,description,information,cityname}=req.body;
             const images = req?.files?.map(image => image?.path?.slice(7));
             const result = await this.#service.createCompetitions(title,name,description,information,cityname,images);

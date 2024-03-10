@@ -13,8 +13,6 @@ class CompetitionsService {
         this.#cityModel = CityModel;
     }
     async createCompetitions(title,name,description,information,cityname,images) {
-        console.log(title,name,description,information,cityname,images);
-
         const check = await this.#model.findOne({nameVolunter:name});
         if(check){
             if(title == check?.titleCompetitions){
