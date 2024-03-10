@@ -1,4 +1,3 @@
-const { cookie } = require("express-validator");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 function SwaggerConfig (app) {
@@ -10,7 +9,6 @@ function SwaggerConfig (app) {
                 description: "level one if Projects",
                 version: "0.1.0",
             },
-            
             servers: [
                 {
                   url: "http://localhost:3000",
@@ -19,18 +17,7 @@ function SwaggerConfig (app) {
                   url: "http://localhost:5000",
                 },
               ],
-              
-              components : {
-                securitySchemes : {
-                  BearerAuth : {
-                    type: "http",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
-                    
-                  }
-                }
-              },
-              security : [{BearerAuth : [] }]
+      
             
         },
         apis: [process.cwd() + "/src/modules/**/*.swagger.js"]

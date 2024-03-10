@@ -1,3 +1,4 @@
+const { CompetitionsRouter } = require('./modules/Competitions/competitions.router')
 const { AuthRouter } = require('./modules/auth/auth.routes')
 const {CityRouter} = require('./modules/city/city.router')
 const {parameterRouter} = require('./modules/parameter/parameter.router')
@@ -12,6 +13,7 @@ router.use("/province",ProvinceRouter);
 router.use("/city",CityRouter);
 router.use("/city",CityRouter);
 router.use("/paramters",parameterRouter);
+router.use("/competitions",CompetitionsRouter);
 
 
 module.exports ={

@@ -11,12 +11,12 @@ class CityService {
     }
     async createCity(dto) {
         const check = await this.#model.findOne({name:dto.name});
-        if(check) return createHttpError.NotAcceptable(CityMessage.AlreadyExist);
+        if(!check) return createHttpError.NotAcceptable(CityMessage.AlreadyExist);
         const result = await this.#model.create(dto);
         return result._id.toString();
     }
     async findMyCityANDShow(city) {
-        return await  checkExistCity(city)
+        return await  this.checkExistCity(city)
 
     }
     async Addparamters(id_paramters,nameCity) {
@@ -26,13 +26,13 @@ class CityService {
         if(!result) create 
     }
     async showParameters(city) {
-       await checkExistCity(city);
+       await this.checkExistCity(city);
         return await this.#model.findOne({name:city}).populate('parameters');
     }
 
     async checkExistCity(name){
         const result = await this.#model.findOne({name});
-        if(!result) createHttpError.NotFound(CityMessage.NotFound);
+        if(!result)  return createHttpError.NotFound(CityMessage.NotFound);
         return result 
 
     }
