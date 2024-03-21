@@ -41,8 +41,12 @@ const ProvinceObjectParametersSchema = new Schema({
         count:Number,
         day:Date,
      }],
-     date:{type:Date,required:true}
-
+     date:{type:Date,required:true,default:Date.now},
+     isMayor:{type:Boolean,required:false},
+     ishealPrvince:{type:Boolean,required:false},
+     isCountry:{type:Boolean,required:false},
+     iscity:{type:Boolean,required:false},
+     who:{type:[String],required:false}
  },{
     timestamps:true
 

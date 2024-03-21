@@ -11,8 +11,8 @@ class parameterController{
     async createparameter(req, res, next) {
      try {
         const userId=req.user._id;
-        const {num1,num2,num3,num4,num5,num6,num7,num8,num9}=req.body;
-        await this.#service.createparameterService({num1,num2,num3,num4,num5,num6,num7,num8,num9},userId);
+        const {num1,num2,num3,num4,num5,num6,num7,num8,num9,isMayor,ishealPrvince,isCountry,iscity,who}=req.body;
+        await this.#service.createparameterService({num1,num2,num3,num4,num5,num6,num7,num8,num9,isMayor,ishealPrvince,isCountry,iscity,who},userId);
         return res.json({
             message:parameterMessage.CreatedParameters,
         });
@@ -98,6 +98,7 @@ class parameterController{
         next(error);
     }
     }
+
     async conformationPrarmter(req, res,next) {
         try {
 

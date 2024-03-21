@@ -21,6 +21,11 @@
  *                    -    num7
  *                    -    num8
  *                    -    num9
+ *                    -    isMayor
+ *                    -    ishealPrvince
+ *                    -    isCountry
+ *                    -    iscity
+ *                    -    who
  *              properties:
  *                  num1:
  *                     type: number
@@ -39,7 +44,21 @@
  *                  num8:
  *                     type: number
  *                  num9:
- *                     type: number
+ *                     type: number 
+ *                  ishealPrvince:
+ *                     type: boolean 
+ *                     default: false
+ *                  isMayor:
+ *                     type: boolean
+ *                     default: false
+ *                  isCountry:
+ *                     type: boolean
+ *                     default: false
+ *                  iscity:
+ *                     type: boolean
+ *                     default: false
+ *                  who:
+ *                     type: array
  *          UpdateParamters:
  *              type: object  
  *              required:

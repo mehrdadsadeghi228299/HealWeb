@@ -39,7 +39,11 @@ class parameterService {
             num7:dto.num7,
             num8:dto.num8,
             num9:dto.num9,
-            
+            isMayor:dto.isMayor || false,
+            ishealPrvince:dto.ishealPrvince || false,
+            isCountry:dto.isCountry || false ,
+            iscity: dto.iscity || false , 
+            who : dto.who
         });
         user.paramters= newparameters._id;
         await user.save();
