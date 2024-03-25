@@ -11,7 +11,7 @@ class parameterService {
     #usermodel;
     #provincemodel;
     #citymodel;
-    constructor () {
+    constructor () {;
         autoBind(this);
         this.#model = ParametersModel ;
         this.#usermodel = PersonModel ;
