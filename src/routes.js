@@ -11,7 +11,6 @@ router.use("/auth",AuthRouter);
 router.use("/user",UserRoutes);
 router.use("/province",ProvinceRouter);
 router.use("/city",CityRouter);
-router.use("/city",CityRouter);
 router.use("/paramters",parameterRouter);
 router.use("/competitions",CompetitionsRouter);
 
