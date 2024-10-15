@@ -13,27 +13,23 @@ const methodOverride = require("method-override");
 const winston = require('winston');
 const winsnton_mongodb=require('winston-mongodb');
 dotenv.config();
-const logger = winston.createLogger({
+/*const logger = winston.createLogger({
     transports: [
       new winston.transports.Console(),
       new winston.transports.File({ filename: 'combined.log' }),
       new winsnton_mongodb.MongoDB({db:process.env.MONGODB_URL_LOCAL})
     ]
   });
+  */
 const files = new winston.transports.File({ filename: 'combined.log' });
 const console = new winston.transports.Console();
 
-logger
-  .clear()          // Remove all transports
-  .add(console)     // Add console transport
-  .add(files)       // Add file transport
-  .remove(console); // Remove console transport
 
 const port=process.env.PORT; 
 const cookiesecretekey=process.env.cookiesecretekey;
 async function main(){
     const app = express();
-    require('./src/config/mongoose.config');
+ //   require('./src/config/mongoose.config');
     SwaggerConfig(app);
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
